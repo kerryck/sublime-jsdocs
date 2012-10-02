@@ -88,10 +88,12 @@ However, if the line directly afterwards contains a function definition, then it
     -- becomes --
 
     /**
-     * [foobar description]
-     * @param  {[type]} baz [description]
-     * @param  {[type]} quux [description]
-     * @return {[type]}
+     * [foobar description].
+     *
+     * @param baz:[type] [description].
+     * @param quux:[type] [description].
+     *
+     * @return [type] [description].
      */
     function foobar (baz, quux) { }
 
@@ -108,12 +110,14 @@ If you have many arguments, or long variable names, it might be useful to spread
     -- becomes --
 
     /**
-     * [someLongFunctionName description]
-     * @param  {[type]} withArguments [description]
-     * @param  {[type]} across        [description]
-     * @param  {[type]} many          [description]
-     * @param  {[type]} lines         [description]
-     * @return {[type]}               [description]
+     * [someLongFunctionName description].
+
+     * @param withArguments:[type] [description].
+     * @param across:[type] [description].
+     * @param many:[type] [description].
+     * @param lines:[type] [description].
+     *
+     * @return [type] [description].
      */
     function someLongFunctionName(
             withArguments, across,
@@ -161,19 +165,9 @@ If the line following your docblock contains a variable declaration, DocBlockr w
     -- becomes --
 
     /**
-     * [foo description]
-     * @type {Number}
+     * {Number}: [foo description].
      */
     foo = 1
-
-If you press `shift+enter` after the opening `/**` then the docblock will be inserted inline.
-
-    /**<<shift+enter>>
-    bar = new Module();
-
-    -- becomes --
-    /** @type {Module} [bar description] */
-    bar = new Module();
 
 DocBlockr will also try to determine the type of the variable from its name. Variables starting with `is` or `has` are assumed to be booleans, and `callback`, `cb`, `done`, `fn`, and `next` are assumed to be functions. If you use your own variable naming system (eg: hungarian notation: booleans all start with `b`, arrays start with `arr`), you can define these rules yourself. Modify the `jsdocs_notation_map` setting *(in `Base File.sublime-settings`)* like so:
 
