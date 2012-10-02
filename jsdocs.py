@@ -219,21 +219,9 @@ class JsdocsParser:
         else:
             valType = self.guessTypeFromValue(val) or self.guessTypeFromName(name) or "[type]"
 
-        if self.inline:
-            out.append("@%s %s${1:%s}%s ${1:[description]}" % (
-                self.settings['typeTag'],
-                "{" if self.settings['curlyTypes'] else "",
-                valType,
-                "}" if self.settings['curlyTypes'] else ""
-            ))
-        else:
-            out.append("${1:[%s description]}" % (escape(name)))
-            out.append("@%s %s${1:%s}%s" % (
-                self.settings['typeTag'],
-                "{" if self.settings['curlyTypes'] else "",
-                valType,
-                "}" if self.settings['curlyTypes'] else ""
-            ))
+        out.append("${1:%s}: ${1:[description]}." % (
+            valType,
+        ))
 
         return out
 
@@ -244,7 +232,7 @@ class JsdocsParser:
             return out
 
         description = self.getNameOverride() or ('[%s description]' % escape(name))
-        out.append("${1:%s}" % description)
+        out.append("${1:%s}." % description)
 
         self.addExtraTags(out)
 
@@ -255,14 +243,14 @@ class JsdocsParser:
             for argType, argName in self.parseArgs(args):
                 typeInfo = ''
                 if self.settings['typeInfo']:
-                    typeInfo = '%s${1:%s}%s ' % (
+                    typeInfo = '%s${1:%s}%s' % (
                         "{" if self.settings['curlyTypes'] else "",
                         escape(argType or self.guessTypeFromName(argName) or "[type]"),
                         "}" if self.settings['curlyTypes'] else "",
                     )
-                out.append("@param %s%s ${1:[description]}" % (
-                    typeInfo,
-                    escape(argName)
+                out.append("@param %s:%s ${1:[description]}." % (
+                    escape(argName),
+                    typeInfo
                 ))
 
         # return value type might be already available in some languages but
@@ -282,7 +270,7 @@ class JsdocsParser:
             ]
 
             if (self.viewSettings.get('jsdocs_return_description')):
-                format_str = "%s%s %s${1:[description]}"
+                format_str = "%s%s %s${1:[description]}."
                 third_arg = ""
 
                 # the extra space here is so that the description will align with the param description
