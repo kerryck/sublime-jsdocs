@@ -383,7 +383,7 @@ class JsdocsJavascript(JsdocsParser):
         identifier = '[a-zA-Z_$][a-zA-Z_$0-9]*'
         self.settings = {
             # curly brackets around the type information
-            "curlyTypes": True,
+            "curlyTypes": False,
             'typeInfo': True,
             "typeTag": "type",
             # technically, they can contain all sorts of unicode, but w/e
@@ -601,7 +601,7 @@ class JsdocsCoffee(JsdocsParser):
         identifier = '[a-zA-Z_$][a-zA-Z_$0-9]*'
         self.settings = {
             # curly brackets around the type information
-            'curlyTypes': True,
+            'curlyTypes': False,
             'typeTag': "type",
             'typeInfo': True,
             # technically, they can contain all sorts of unicode, but w/e
@@ -723,7 +723,7 @@ class JsdocsObjC(JsdocsParser):
         identifier = '[a-zA-Z_$][a-zA-Z_$0-9]*'
         self.settings = {
             # curly brackets around the type information
-            "curlyTypes": True,
+            "curlyTypes": False,
             'typeInfo': True,
             "typeTag": "type",
             # technically, they can contain all sorts of unicode, but w/e
